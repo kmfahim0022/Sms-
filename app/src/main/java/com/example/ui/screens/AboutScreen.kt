@@ -70,7 +70,7 @@ fun AboutScreen(onBack: () -> Unit) {
                         horizontalAlignment = Alignment.CenterHorizontally
                     ) {
                         Image(
-                            painter = painterResource(id = R.drawable.ic_afx_sms_foreground_1795527479071),
+                            painter = painterResource(id = R.drawable.ic_afx_message_logo_1795529058296),
                             contentDescription = stringResource(R.string.app_name),
                             modifier = Modifier
                                 .size(88.dp)

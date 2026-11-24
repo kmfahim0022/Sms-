@@ -285,7 +285,7 @@ fun MessagesScreen(
                     } else if (messages.isEmpty()) {
                         item {
                             EmptyStateBannerCard(
-                                title = "No Messages Found",
+                                title = "No Messages Here",
                                 description = if (searchQuery.isNotBlank() || activeFilter != SmsFilterOption.ALL) {
                                     "Try clearing your search or choosing another filter."
                                 } else {

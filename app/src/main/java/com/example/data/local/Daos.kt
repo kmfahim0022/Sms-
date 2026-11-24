@@ -1,9 +1,11 @@
 package com.example.data.local
 
 import androidx.room.Dao
+import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
+import androidx.room.Update
 import kotlinx.coroutines.flow.Flow
 
 @Dao
@@ -13,6 +15,15 @@ interface SmsDao {
 
     @Query("SELECT * FROM cached_sms WHERE isFavorite = 1 ORDER BY timestamp DESC")
     fun observeFavoriteMessages(): Flow<List<CachedSmsEntity>>
+
+    @Query(
+        "SELECT * FROM cached_sms " +
+            "WHERE sender LIKE '%' || :query || '%' " +
+            "OR address LIKE '%' || :query || '%' " +
+            "OR body LIKE '%' || :query || '%' " +
+            "ORDER BY timestamp DESC"
+    )
+    fun searchMessages(query: String): Flow<List<CachedSmsEntity>>
 
     @Query("SELECT * FROM cached_sms WHERE uniqueKey = :uniqueKey LIMIT 1")
     fun observeMessageByKey(uniqueKey: String): Flow<CachedSmsEntity?>
@@ -39,16 +50,25 @@ interface SmsDao {
     fun observeUnreadCount(): Flow<Int>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun insertMessage(message: CachedSmsEntity)
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun upsertAll(messages: List<CachedSmsEntity>)
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     suspend fun insertIfAbsent(messages: List<CachedSmsEntity>)
+
+    @Update
+    suspend fun updateMessage(message: CachedSmsEntity)
 
     @Query("UPDATE cached_sms SET isFavorite = :isFavorite WHERE uniqueKey = :uniqueKey")
     suspend fun setFavorite(uniqueKey: String, isFavorite: Boolean)
 
     @Query("UPDATE cached_sms SET isRead = 1 WHERE uniqueKey = :uniqueKey")
     suspend fun markAsReadLocal(uniqueKey: String)
+
+    @Delete
+    suspend fun deleteMessage(message: CachedSmsEntity)
 
     @Query("DELETE FROM cached_sms WHERE uniqueKey = :uniqueKey")
     suspend fun deleteByKey(uniqueKey: String)

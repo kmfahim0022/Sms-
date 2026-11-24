@@ -3,6 +3,6 @@
     <item
         android:width="66dp"
         android:height="66dp"
-        android:drawable="@drawable/ic_afx_sms_foreground_1795527479071"
+        android:drawable="@drawable/ic_afx_message_logo_1795529058296"
         android:gravity="center" />
 </layer-list>

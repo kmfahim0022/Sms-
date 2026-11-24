@@ -406,16 +406,17 @@ fun EmptyStateBannerCard(
     description: String,
     actionLabel: String? = null,
     onAction: (() -> Unit)? = null,
+    coverImageRes: Int = R.drawable.img_message_cover_1795529233385,
     modifier: Modifier = Modifier
 ) {
     GlassCard(modifier = modifier.fillMaxWidth(), cornerRadius = 22.dp) {
         Column(modifier = Modifier.fillMaxWidth()) {
             Image(
-                painter = painterResource(id = R.drawable.img_privacy_banner_1795527480049),
+                painter = painterResource(id = coverImageRes),
                 contentDescription = title,
                 modifier = Modifier
                     .fillMaxWidth()
-                    .height(130.dp),
+                    .height(148.dp),
                 contentScale = ContentScale.Crop
             )
             Column(modifier = Modifier.padding(18.dp)) {

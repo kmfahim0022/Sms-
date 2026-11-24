@@ -84,4 +84,43 @@ class ExampleRobolectricTest {
         assertFalse(masked.contains("ABCDEFGHIJKLMNOPQRSTUVWXYZ"))
         assertTrue(masked.endsWith("1234"))
     }
+
+    @Test
+    fun `room sms dao stores queries favorites and deletes local sms copies`() = runTest {
+        val context = ApplicationProvider.getApplicationContext<Context>()
+        val db = androidx.room.Room.inMemoryDatabaseBuilder(
+            context,
+            com.example.data.local.AppDatabase::class.java
+        ).allowMainThreadQueries().build()
+        val dao = db.smsDao()
+
+        val sample = CachedSmsEntity(
+            uniqueKey = "local_test_1",
+            systemSmsId = 10L,
+            threadId = 2L,
+            address = "+15550100",
+            displayName = "Jordan Lee",
+            sender = "Jordan Lee",
+            body = "Meeting moved to 5 PM in Studio B",
+            timestamp = 1700001000000L,
+            type = 1,
+            isRead = false,
+            isFavorite = false,
+            bodyHash = "hash_jordan_1"
+        )
+        dao.insertMessage(sample)
+
+        val all = dao.getAllMessagesSnapshot()
+        assertEquals(1, all.size)
+        assertEquals("Jordan Lee", all.first().sender)
+        assertFalse(all.first().isFavorite)
+
+        dao.setFavorite("local_test_1", true)
+        val fav = dao.getMessageByKey("local_test_1")
+        assertTrue(fav?.isFavorite == true)
+
+        dao.deleteMessage(fav!!)
+        assertEquals(0, dao.getAllMessagesSnapshot().size)
+        db.close()
+    }
 }
