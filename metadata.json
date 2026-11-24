@@ -1,0 +1,6 @@
+{
+  "name": "AFX SMS Manager",
+  "description": "Personal SMS management, search, favorites, and user-controlled encrypted local and Telegram backup application by AFX Tech.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

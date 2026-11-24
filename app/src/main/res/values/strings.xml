@@ -1,0 +1,25 @@
+<resources>
+    <string name="app_name">AFX SMS Manager</string>
+    <string name="developer_name">AFX Tech</string>
+    <string name="app_version">1.0.0</string>
+    <string name="about_description">A personal SMS management application designed to provide a convenient inbox, search, organization, and user-controlled backup experience.</string>
+
+    <string name="perm_read_sms_title">Read SMS Messages</string>
+    <string name="perm_read_sms_rationale">Allows AFX SMS Manager to display your device SMS inbox and sent messages locally, enable search and favorites, and create backups that you explicitly initiate.</string>
+
+    <string name="perm_receive_sms_title">Live Inbox Refresh</string>
+    <string name="perm_receive_sms_rationale">Allows the app to detect newly arriving SMS messages to refresh your local inbox and show an optional local notification.</string>
+
+    <string name="perm_read_contacts_title">Contact Name Lookup (Optional)</string>
+    <string name="perm_read_contacts_rationale">Optional permission used solely to display saved contact names alongside phone numbers in your local inbox.</string>
+
+    <string name="perm_notifications_title">Notifications</string>
+    <string name="perm_notifications_rationale">Used for backup completion/failure alerts, optional new SMS notifications, and user-enabled backup reminders.</string>
+
+    <string name="channel_sms_name">Inbox Updates</string>
+    <string name="channel_sms_desc">Optional local notifications when a new SMS arrives</string>
+    <string name="channel_backup_name">Backup Status</string>
+    <string name="channel_backup_desc">Notifications for local and Telegram backup completion or errors</string>
+    <string name="channel_reminder_name">Backup Reminders</string>
+    <string name="channel_reminder_desc">Scheduled reminders to create a local backup of your messages</string>
+</resources>
